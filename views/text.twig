@@ -19,7 +19,7 @@ jQuery(document).ready(function () {
 <h2>編集</h2>
 <form action="/text" method="post">
 <div><textarea name="text" id="text" cols="60" rows="16">{{ text|escape }}</textarea></div>
-<div><input type="submit" value="Save" /><input type="button" id="preview_button" value="Preview" /></div>
+<div><input type="submit" value="保存" /><input type="button" id="preview_button" value="プレビュー" /></div>
 </form>
 
 <form action="/preview" method="post" id="preview_form" target="preview_window">
