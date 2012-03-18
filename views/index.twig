@@ -1,0 +1,8 @@
+{% extends layout %}
+
+{% block content %}
+<h2>入力テキスト</h2>
+<textarea cols="60" rows="16" readonly="readonly">{{ raw_text|escape }}</textarea>
+<h2>変換後のテキスト</h2>
+<textarea cols="60" rows="16" readonly="readonly">{{ converted_text|escape }}</textarea>
+{% endblock %}

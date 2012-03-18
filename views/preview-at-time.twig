@@ -1,0 +1,11 @@
+{% extends layout %}
+
+{% block content %}
+<h2>{{ datetime.format(date_format) }} のプレビュー</h2>
+
+<pre>{{ converted_text|e }}</pre>
+
+<h2>入力テキスト</h2>
+
+<pre>{{ raw_text|e }}</pre>
+{% endblock %}
