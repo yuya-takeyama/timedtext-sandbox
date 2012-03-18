@@ -36,9 +36,15 @@ $app->before(function () use ($app) {
 });
 
 $app->get('/text', function () use ($app) {
+    $datetime = new DateTime;
     $app->response->setContent(
         $app['twig']->render('text.twig', array(
-            'text' => $app->text,
+            'text'       => $app->text,
+            'cur_year'   => (int)$datetime->format('Y'),
+            'cur_month'  => (int)$datetime->format('n'),
+            'cur_day'    => (int)$datetime->format('j'),
+            'cur_hour'   => (int)$datetime->format('G'),
+            'cur_minute' => (int)$datetime->format('i'),
         ))
     );
     return $app->response;
@@ -56,6 +62,22 @@ $app->post('/preview', function () use ($app) {
         $app['twig']->render('preview.twig', array(
             'raw_text'       => $app['request']->get('text'),
             'converted_text' => TimedText::convert($app['request']->get('text')),
+            'date_format'    => 'Y/m/d (D) H:i',
+        ))
+    );
+    return $app->response;
+});
+
+$app->post('/preview-at-time', function () use ($app) {
+    $datetime = new DateTime;
+    $req = $app['request'];
+    $datetime->setDate($req->get('year'), $req->get('month'), $req->get('day'));
+    $datetime->setTime($req->get('hour'), $req->get('minute'));
+    $app->response->setContent(
+        $app['twig']->render('preview-at-time.twig', array(
+            'raw_text'       => $req->get('text'),
+            'converted_text' => TimedText::convert($req->get('text'))->at($datetime->getTimestamp()),
+            'datetime'       => $datetime,
             'date_format'    => 'Y/m/d (D) H:i',
         ))
     );

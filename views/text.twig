@@ -6,23 +6,69 @@ jQuery(document).ready(function () {
   var $ = jQuery;
 
   var $text = $('#text')
-    , $previewForm = $('#preview_form')
-    , $hiddenText = $('#hidden_text');
+    , $previewForm       = $('#preview_form')
+    , $previewAtTimeForm = $('#preview_at_time_form')
+    , $hiddenText        = $('.hidden_text');
+
   $('#preview_button').on('click', function () {
     $hiddenText.val($text.val());
     window.open('about:blank', 'preview_window', 'menubar=no,toolbar=no,location=no,status=no,resizable=yes');
     $previewForm.submit();
   });
+
+  $('#preview_at_time_button').on('click', function () {
+    $hiddenText.val($text.val());
+    window.open('about:blank', 'preview_window', 'menubar=no,toolbar=no,location=no,status=no,resizable=yes');
+    $previewAtTimeForm.submit();
+  });
 });
 </script>
 
-<h2>編集</h2>
+<h2>編集・プレビュー</h2>
+
 <form action="/text" method="post">
 <div><textarea name="text" id="text" cols="60" rows="16">{{ text|escape }}</textarea></div>
 <div><input type="submit" value="保存" /><input type="button" id="preview_button" value="プレビュー" /></div>
 </form>
 
+<h2>時間を指定してプレビュー</h2>
+
+<form action="/preview-at-time" method="post" id="preview_at_time_form" target="preview_window">
+<select name="year">
+{% for year in 2000..2020 %}
+<option value="{{ year|e }}"{% if year == cur_year %} selected="selected"{% endif %}>{{ year|e }}</option>
+{% endfor %}
+</select>
+-
+<select name="month">
+{% for month in 1..12 %}
+<option value="{{ month|e }}"{% if month == cur_month %} selected="selected"{% endif %}>{{ "%02d"|format(month) }}</option>
+{% endfor %}
+</select>
+-
+<select name="day">
+{% for day in 1..31 %}
+<option value="{{ day|e }}"{% if day == cur_day %} selected="selected"{% endif %}>{{ "%02d"|format(day) }}</option>
+{% endfor %}
+</select>
+
+<select name="hour">
+{% for hour in 0..23 %}
+<option value="{{ hour|e }}"{% if hour == cur_hour %} selected="selected"{% endif %}>{{ "%02d"|format(hour) }}</option>
+{% endfor %}
+</select>
+:
+<select name="minute">
+{% for minute in 0..59 %}
+<option value="{{ minute|e }}"{% if minute == cur_minute %} selected="selected"{% endif %}>{{ "%02d"|format(minute) }}</option>
+{% endfor %}
+</select>
+
+<input type="button" id="preview_at_time_button" value="プレビュー" />
+<input type="hidden" name="text" class="hidden_text" />
+</form>
+
 <form action="/preview" method="post" id="preview_form" target="preview_window">
-<input type="hidden" name="text" id="hidden_text">
+<input type="hidden" name="text" class="hidden_text" />
 </form>
 {% endblock %}
