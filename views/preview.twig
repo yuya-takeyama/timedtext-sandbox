@@ -4,7 +4,9 @@
 <h2>プレビュー</h2>
 {% for key, section in text %}
 <div class="section">
-  {% if section.hasBefore() %}
+  {% if section.hasAfter() and section.hasBefore() %}
+    <div class="date">このセクションは {{ section.getAfter()|date(date_format)}} から {{ section.getBefore()|date(date_format) }} まで表示されます.</div>
+  {% elseif section.hasBefore() %}
     <div class="date">このセクションは {{ section.getBefore()|date(date_format) }} まで表示されます.</div>
   {% elseif section.hasAfter() %}
     <div class="date">このセクションは {{ section.getAfter()|date(date_format) }} 以降に表示されます.</div>
