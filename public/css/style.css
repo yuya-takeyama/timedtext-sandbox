@@ -1,0 +1,17 @@
+.section {
+  border: 1px #000 solid;
+  background: #dfd;
+  padding: 1em;
+  margin: 1em;
+}
+
+.section pre {
+  font-size: 14px;
+}
+
+.date {
+  border: 1px #000 dashed;
+  background: #fff;
+  font-size: 9px;
+  padding: 0.4em;
+}

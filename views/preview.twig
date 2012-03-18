@@ -1,0 +1,19 @@
+{% extends layout %}
+
+{% block content %}
+<h2>プレビュー</h2>
+{% for key, section in text %}
+<div class="section">
+  {% if section.hasBefore() %}
+    <div class="date">このセクションは {{ section.getBefore()|date(date_format) }} まで表示されます.</div>
+  {% elseif section.hasAfter() %}
+    <div class="date">このセクションは {{ section.getAfter()|date(date_format) }} 以降に表示されます.</div>
+  {% else %}
+    <div class="date">このセクションは常に表示されます.</div>
+  {% endif %}
+  <pre>{{ section }}</pre>
+</div>
+{% endfor %}
+<pre>
+</pre>
+{% endblock %}

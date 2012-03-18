@@ -1,9 +1,28 @@
 {% extends layout %}
 
 {% block content %}
+<script type="text/javascript">
+jQuery(document).ready(function () {
+  var $ = jQuery;
+
+  var $text = $('#text')
+    , $previewForm = $('#preview_form')
+    , $hiddenText = $('#hidden_text');
+  $('#preview_button').on('click', function () {
+    $hiddenText.val($text.val());
+    window.open('about:blank', 'preview_window', 'menubar=no,toolbar=no,location=no,status=no,resizable=yes');
+    $previewForm.submit();
+  });
+});
+</script>
+
 <h2>編集</h2>
 <form action="/text" method="post">
-<div><textarea name="text" cols="60" rows="16">{{ text|escape }}</textarea></div>
-<div><input type="submit" value="Post" /></div>
-</post>
+<div><textarea name="text" id="text" cols="60" rows="16">{{ text|escape }}</textarea></div>
+<div><input type="submit" value="Post" /><input type="button" id="preview_button" value="Preview" /></div>
+</form>
+
+<form action="/preview" method="post" id="preview_form" target="preview_window">
+<input type="hidden" name="text" id="hidden_text">
+</form>
 {% endblock %}
