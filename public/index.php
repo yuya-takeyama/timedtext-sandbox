@@ -35,6 +35,22 @@ $app->before(function () use ($app) {
     }
 });
 
+$app->get('/text', function () use ($app) {
+    $app->response->setContent(
+        $app['twig']->render('text.twig', array(
+            'text' => $app->text,
+        ))
+    );
+    return $app->response;
+});
+
+$app->post('/text', function () use ($app) {
+    $app->response->headers->setCookie(new Cookie('text', $app['request']->get('text')));
+    $app->response->setStatusCode(302);
+    $app->response->headers->set('Location', '/text');
+    return $app->response;
+});
+
 $app->get('/', function () use ($app) {
     $app->response->setContent(
         $app['twig']->render('index.twig', array(

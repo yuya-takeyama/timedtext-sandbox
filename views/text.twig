@@ -1,0 +1,9 @@
+{% extends layout %}
+
+{% block content %}
+<h2>編集</h2>
+<form action="/text" method="post">
+<div><textarea name="text" cols="60" rows="16">{{ text|escape }}</textarea></div>
+<div><input type="submit" value="Post" /></div>
+</post>
+{% endblock %}
