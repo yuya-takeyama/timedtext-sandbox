@@ -1,5 +1,5 @@
 <?php
-set_include_path(__DIR__ . '/../vendor/timed-text/src' . PATH_SEPARATOR . get_include_path());
+set_include_path(__DIR__ . '/../vendor/timedtext/src' . PATH_SEPARATOR . get_include_path());
 require_once __DIR__ . '/../vendor/silex.phar';
 require_once 'TimedText.php';
 
@@ -54,8 +54,9 @@ $app->post('/text', function () use ($app) {
 $app->post('/preview', function () use ($app) {
     $app->response->setContent(
         $app['twig']->render('preview.twig', array(
-            'text'        => TimedText::convert($app['request']->get('text')),
-            'date_format' => 'Y/m/d (D) H:i',
+            'raw_text'       => $app['request']->get('text'),
+            'converted_text' => TimedText::convert($app['request']->get('text')),
+            'date_format'    => 'Y/m/d (D) H:i',
         ))
     );
     return $app->response;

@@ -1,12 +1,16 @@
 .section {
   border: 1px #000 solid;
-  background: #dfd;
+  background: #fff;
   padding: 1em;
   margin: 1em;
 }
 
 .section pre {
+  border: 1px #000 solid;
+  background: #fff;
   font-size: 14px;
+  padding: 0.2em;
+  margin: 1em 0 0 0;
 }
 
 .date {
@@ -14,4 +18,16 @@
   background: #fff;
   font-size: 9px;
   padding: 0.4em;
+}
+
+.before {
+  background: #dfd;
+}
+
+.between {
+  background: #ffd;
+}
+
+.after {
+  background: #fdd;
 }
