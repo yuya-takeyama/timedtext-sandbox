@@ -4,19 +4,41 @@
   <meta charset="UTF-8">
   <title>TimedText sandbox</title>
   <meta http-equiv="Content-Style-Type" content="text/css">
+  <link rel="stylesheet" href="/css/bootstrap.css" type="text/css">
+  <style type="text/css">
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+  </style>
   <link rel=stylesheet href="/css/style.css" type="text/css">
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 </head>
 <body>
-  <h1>TimedText sandbox</h1>
-  <div><p><a href="https://github.com/yuya-takeyama/timedtext">TimedText</a> のサンドボックスサイトです. データベースではなくブラウザのクッキーに保存されます.<br />
-このサイトのソースコードは <a href="https://github.com/yuya-takeyama/timedtext-sandbox">GitHub</a> で公開しています.</p></div>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="/">TimedText sandbox</a>
+        <div class="nav-callapse">
+          <ul class="nav">
+            <li><a href="/">トップ</a></li>
+            <li><a href="/text">編集</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <ul>
-    <li><a href="/">トップ</a></li>
-    <li><a href="/text">編集</a></li>
-  </ul>
+  <div class="container">
+
+    <div class="hero-unit">
+      <h1>TimedText sandbox</h1>
+
+      <div><p><a href="https://github.com/yuya-takeyama/timedtext">TimedText</a> のサンドボックスサイトです. データベースではなくブラウザのクッキーに保存されます.<br />
+    このサイトのソースコードは <a href="https://github.com/yuya-takeyama/timedtext-sandbox">GitHub</a> で公開しています.</p></div>
+    </div>
 
   {% block content %}{% endblock %}
+  </div>
 </body>
 </html>
