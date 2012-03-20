@@ -46,12 +46,14 @@ $app->get('/text', function () use ($app) {
     $datetime = new DateTime;
     $app->response->setContent(
         $app['twig']->render('text.twig', array(
-            'text'       => $app->text,
-            'cur_year'   => (int)$datetime->format('Y'),
-            'cur_month'  => (int)$datetime->format('n'),
-            'cur_day'    => (int)$datetime->format('j'),
-            'cur_hour'   => (int)$datetime->format('G'),
-            'cur_minute' => (int)$datetime->format('i'),
+            'text'           => $app->text,
+            'converted_text' => TimedText::convert($app->text),
+            'cur_year'       => (int)$datetime->format('Y'),
+            'cur_month'      => (int)$datetime->format('n'),
+            'cur_day'        => (int)$datetime->format('j'),
+            'cur_hour'       => (int)$datetime->format('G'),
+            'cur_minute'     => (int)$datetime->format('i'),
+            'date_format'    => 'Y/m/d (D) H:i',
         ))
     );
     return $app->response;
@@ -61,17 +63,6 @@ $app->post('/text', function () use ($app) {
     $app->response->headers->setCookie(new Cookie('text', $app['request']->get('text')));
     $app->response->setStatusCode(302);
     $app->response->headers->set('Location', '/text');
-    return $app->response;
-});
-
-$app->post('/preview', function () use ($app) {
-    $app->response->setContent(
-        $app['twig']->render('preview.twig', array(
-            'raw_text'       => $app['request']->get('text'),
-            'converted_text' => TimedText::convert($app['request']->get('text')),
-            'date_format'    => 'Y/m/d (D) H:i',
-        ))
-    );
     return $app->response;
 });
 
