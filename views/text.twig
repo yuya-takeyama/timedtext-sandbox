@@ -24,51 +24,63 @@ jQuery(document).ready(function () {
 });
 </script>
 
-<h2>編集・プレビュー</h2>
+<div class="row">
+  <div class="span6">
+    <h2>編集・プレビュー</h2>
 
-<form action="/text" method="post">
-<div><textarea name="text" id="text" cols="60" rows="16">{{ text|escape }}</textarea></div>
-<div><input type="submit" value="保存" /><input type="button" id="preview_button" value="プレビュー" /></div>
-</form>
+    <div class="well">
+    <form action="/text" method="post">
+      <label>入力テキスト</label>
+      <div>
+        <textarea name="text" id="text" class="span5" rows="16">{{ text|escape }}</textarea>
+      </div>
+      <div>
+        <input type="submit" class="btn btn-primary" value="保存" />
+        <input type="button" class="btn" id="preview_button" value="プレビュー" />
+      </div>
+    </form>
+    </div>
 
-<h2>時間を指定してプレビュー</h2>
+    <h2>時間を指定してプレビュー</h2>
 
-<form action="/preview-at-time" method="post" id="preview_at_time_form" target="preview_window">
-<select name="year">
-{% for year in 2000..2020 %}
-<option value="{{ year|e }}"{% if year == cur_year %} selected="selected"{% endif %}>{{ year|e }}</option>
-{% endfor %}
-</select>
+    <form action="/preview-at-time" method="post" id="preview_at_time_form" target="preview_window">
+      <select name="year" class="span1">
+      {% for year in 2000..2020 %}
+        <option value="{{ year|e }}"{% if year == cur_year %} selected="selected"{% endif %}>{{ year|e }}</option>
+      {% endfor %}
+      </select>
 -
-<select name="month">
-{% for month in 1..12 %}
-<option value="{{ month|e }}"{% if month == cur_month %} selected="selected"{% endif %}>{{ "%02d"|format(month) }}</option>
-{% endfor %}
-</select>
+      <select name="month" class="span1">
+      {% for month in 1..12 %}
+        <option value="{{ month|e }}"{% if month == cur_month %} selected="selected"{% endif %}>{{ "%02d"|format(month) }}</option>
+      {% endfor %}
+      </select>
 -
-<select name="day">
-{% for day in 1..31 %}
-<option value="{{ day|e }}"{% if day == cur_day %} selected="selected"{% endif %}>{{ "%02d"|format(day) }}</option>
-{% endfor %}
-</select>
+      <select name="day" class="span1">
+      {% for day in 1..31 %}
+        <option value="{{ day|e }}"{% if day == cur_day %} selected="selected"{% endif %}>{{ "%02d"|format(day) }}</option>
+      {% endfor %}
+      </select>
 
-<select name="hour">
-{% for hour in 0..23 %}
-<option value="{{ hour|e }}"{% if hour == cur_hour %} selected="selected"{% endif %}>{{ "%02d"|format(hour) }}</option>
-{% endfor %}
-</select>
+      <select name="hour" class="span1">
+      {% for hour in 0..23 %}
+        <option value="{{ hour|e }}"{% if hour == cur_hour %} selected="selected"{% endif %}>{{ "%02d"|format(hour) }}</option>
+      {% endfor %}
+      </select>
 :
-<select name="minute">
-{% for minute in 0..59 %}
-<option value="{{ minute|e }}"{% if minute == cur_minute %} selected="selected"{% endif %}>{{ "%02d"|format(minute) }}</option>
-{% endfor %}
-</select>
+      <select name="minute" class="span1">
+      {% for minute in 0..59 %}
+        <option value="{{ minute|e }}"{% if minute == cur_minute %} selected="selected"{% endif %}>{{ "%02d"|format(minute) }}</option>
+      {% endfor %}
+      </select>
 
-<input type="button" id="preview_at_time_button" value="プレビュー" />
-<input type="hidden" name="text" class="hidden_text" />
-</form>
+      <input type="button" id="preview_at_time_button" class="btn" value="プレビュー" />
+      <input type="hidden" name="text" class="hidden_text" />
+    </form>
 
-<form action="/preview" method="post" id="preview_form" target="preview_window">
-<input type="hidden" name="text" class="hidden_text" />
-</form>
+    <form action="/preview" method="post" id="preview_form" target="preview_window">
+      <input type="hidden" name="text" class="hidden_text" />
+    </form>
+  </div>
+</div>
 {% endblock %}
