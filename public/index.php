@@ -66,17 +66,6 @@ $app->post('/text', function () use ($app) {
     return $app->response;
 });
 
-$app->post('/preview', function () use ($app) {
-    $app->response->setContent(
-        $app['twig']->render('preview.twig', array(
-            'raw_text'       => $app['request']->get('text'),
-            'converted_text' => TimedText::convert($app['request']->get('text')),
-            'date_format'    => 'Y/m/d (D) H:i',
-        ))
-    );
-    return $app->response;
-});
-
 $app->post('/preview-at-time', function () use ($app) {
     $datetime = new DateTime;
     $req = $app['request'];
