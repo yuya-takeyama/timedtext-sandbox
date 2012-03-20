@@ -43,40 +43,42 @@ jQuery(document).ready(function () {
 
     <h2>時間を指定してプレビュー</h2>
 
-    <form action="/preview-at-time" method="post" id="preview_at_time_form" target="preview_window">
-      <select name="year" class="span1">
-      {% for year in 2000..2020 %}
-        <option value="{{ year|e }}"{% if year == cur_year %} selected="selected"{% endif %}>{{ year|e }}</option>
-      {% endfor %}
-      </select>
--
-      <select name="month" class="span1">
-      {% for month in 1..12 %}
-        <option value="{{ month|e }}"{% if month == cur_month %} selected="selected"{% endif %}>{{ "%02d"|format(month) }}</option>
-      {% endfor %}
-      </select>
--
-      <select name="day" class="span1">
-      {% for day in 1..31 %}
-        <option value="{{ day|e }}"{% if day == cur_day %} selected="selected"{% endif %}>{{ "%02d"|format(day) }}</option>
-      {% endfor %}
-      </select>
+    <div class="well">
+      <form action="/preview-at-time" method="post" id="preview_at_time_form" target="preview_window">
+        <select name="year" class="span1">
+        {% for year in 2000..2020 %}
+          <option value="{{ year|e }}"{% if year == cur_year %} selected="selected"{% endif %}>{{ year|e }}</option>
+        {% endfor %}
+        </select>
+  -
+        <select name="month" class="span1">
+        {% for month in 1..12 %}
+          <option value="{{ month|e }}"{% if month == cur_month %} selected="selected"{% endif %}>{{ "%02d"|format(month) }}</option>
+        {% endfor %}
+        </select>
+  -
+        <select name="day" class="span1">
+        {% for day in 1..31 %}
+          <option value="{{ day|e }}"{% if day == cur_day %} selected="selected"{% endif %}>{{ "%02d"|format(day) }}</option>
+        {% endfor %}
+        </select>
 
-      <select name="hour" class="span1">
-      {% for hour in 0..23 %}
-        <option value="{{ hour|e }}"{% if hour == cur_hour %} selected="selected"{% endif %}>{{ "%02d"|format(hour) }}</option>
-      {% endfor %}
-      </select>
-:
-      <select name="minute" class="span1">
-      {% for minute in 0..59 %}
-        <option value="{{ minute|e }}"{% if minute == cur_minute %} selected="selected"{% endif %}>{{ "%02d"|format(minute) }}</option>
-      {% endfor %}
-      </select>
+        <select name="hour" class="span1">
+        {% for hour in 0..23 %}
+          <option value="{{ hour|e }}"{% if hour == cur_hour %} selected="selected"{% endif %}>{{ "%02d"|format(hour) }}</option>
+        {% endfor %}
+        </select>
+  :
+        <select name="minute" class="span1">
+        {% for minute in 0..59 %}
+          <option value="{{ minute|e }}"{% if minute == cur_minute %} selected="selected"{% endif %}>{{ "%02d"|format(minute) }}</option>
+        {% endfor %}
+        </select>
 
-      <input type="button" id="preview_at_time_button" class="btn" value="プレビュー" />
-      <input type="hidden" name="text" class="hidden_text" />
-    </form>
+        <input type="button" id="preview_at_time_button" class="btn" value="プレビュー" />
+        <input type="hidden" name="text" class="hidden_text" />
+      </form>
+    </div>
 
     <form action="/preview" method="post" id="preview_form" target="preview_window">
       <input type="hidden" name="text" class="hidden_text" />
