@@ -1,6 +1,18 @@
 {% extends layout %}
 
 {% block content %}
+<div class="hero-unit">
+  <h1>TimedText sandbox</h1>
+
+  <div>
+    <p><a href="https://github.com/yuya-takeyama/timedtext">TimedText</a> は文字列を時間帯によって出し分けるためのお手軽構文です.</p>
+
+    <p>このサイトは TimedText の構文を試すためのサンドボックスとして利用でき, ソースコードは <a href="https://github.com/yuya-takeyama/timedtext-sandbox">GitHub</a> から取得することができます.</p>
+
+    <p>入力した文字列はデータベースではなく, ブラウザのクッキーに保存されます.</p>
+  </div>
+</div>
+
 <h2>入力テキスト</h2>
 <textarea cols="60" rows="16" readonly="readonly">{{ raw_text|escape }}</textarea>
 <h2>変換後のテキスト</h2>
