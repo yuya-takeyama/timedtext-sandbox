@@ -46,12 +46,14 @@ $app->get('/text', function () use ($app) {
     $datetime = new DateTime;
     $app->response->setContent(
         $app['twig']->render('text.twig', array(
-            'text'       => $app->text,
-            'cur_year'   => (int)$datetime->format('Y'),
-            'cur_month'  => (int)$datetime->format('n'),
-            'cur_day'    => (int)$datetime->format('j'),
-            'cur_hour'   => (int)$datetime->format('G'),
-            'cur_minute' => (int)$datetime->format('i'),
+            'text'           => $app->text,
+            'converted_text' => TimedText::convert($app->text),
+            'cur_year'       => (int)$datetime->format('Y'),
+            'cur_month'      => (int)$datetime->format('n'),
+            'cur_day'        => (int)$datetime->format('j'),
+            'cur_hour'       => (int)$datetime->format('G'),
+            'cur_minute'     => (int)$datetime->format('i'),
+            'date_format'    => 'Y/m/d (D) H:i',
         ))
     );
     return $app->response;

@@ -26,7 +26,7 @@ jQuery(document).ready(function () {
 
 <div class="row">
   <div class="span6">
-    <h2>編集・プレビュー</h2>
+    <h2>編集</h2>
 
     <div class="well">
     <form action="/text" method="post">
@@ -35,8 +35,8 @@ jQuery(document).ready(function () {
         <textarea name="text" id="text" class="span5" rows="16">{{ text|escape }}</textarea>
       </div>
       <div>
+        <p>入力テキストはブラウザのクッキーに保存されます.</p>
         <input type="submit" class="btn btn-primary" value="保存" />
-        <input type="button" class="btn" id="preview_button" value="プレビュー" />
       </div>
     </form>
     </div>
@@ -81,6 +81,27 @@ jQuery(document).ready(function () {
     <form action="/preview" method="post" id="preview_form" target="preview_window">
       <input type="hidden" name="text" class="hidden_text" />
     </form>
+  </div>
+
+  <div class="span6">
+    <h2>プレビュー</h2>
+
+    {% for key, section in converted_text %}
+    <div class="well">
+      <div class="alert alert-info">
+      {% if section.hasAfter() and section.hasBefore() %}
+        このセクションは {{ section.getAfter()|date(date_format)}} から {{ section.getBefore()|date(date_format) }} まで表示されます.
+      {% elseif section.hasBefore() %}
+        このセクションは {{ section.getBefore()|date(date_format) }} まで表示されます.
+      {% elseif section.hasAfter() %}
+        このセクションは {{ section.getAfter()|date(date_format) }} 以降に表示されます.
+      {% else %}
+        このセクションは常に表示されます.
+      {% endif %}
+      </div>
+      <pre>{{ section|e }}</pre>
+    </div>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}
