@@ -6,15 +6,8 @@ jQuery(document).ready(function () {
   var $ = jQuery;
 
   var $text = $('#text')
-    , $previewForm       = $('#preview_form')
     , $previewAtTimeForm = $('#preview_at_time_form')
     , $hiddenText        = $('.hidden_text');
-
-  $('#preview_button').on('click', function () {
-    $hiddenText.val($text.val());
-    window.open('about:blank', 'preview_window', 'menubar=no,toolbar=no,location=no,status=no,resizable=yes');
-    $previewForm.submit();
-  });
 
   $('#preview_at_time_button').on('click', function () {
     $hiddenText.val($text.val());
