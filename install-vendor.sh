@@ -1,8 +1,9 @@
 #!/bin/sh
-if [ -d ./vendor ]; then
-  rm -rf ./vendor
+composer install
+if [ ! -d ./vendor ]; then
+  mkdir ./vendor
 fi
-mkdir ./vendor
-curl http://silex.sensiolabs.org/get/silex.phar > ./vendor/silex.phar
-git clone git://github.com/yuya-takeyama/timedtext.git ./vendor/timedtext
-git clone git://github.com/fabpot/Twig.git ./vendor/twig
+if [ ! -d ./vendor/timedtext ]; then
+  git clone git://github.com/yuya-takeyama/timedtext.git ./vendor/timedtext
+fi
+cd ./vendor/timedtext && git pull origin master
